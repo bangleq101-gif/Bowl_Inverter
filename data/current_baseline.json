@@ -3,12 +3,15 @@
   "checkpoint_date": "2026-08-26",
   "goal": "alternate upright/inverted output at 160 bowls/min",
   "product": {
-    "top_diameter_mm": 138.0,
-    "bottom_diameter_mm": 120.0,
+    "bottom_diameter_mm": 138.0,
+    "top_diameter_mm": 120.0,
     "height_mm": 62.0,
     "mass_g": 87.0,
-    "incoming_orientation": "upright",
-    "approximation": "truncated_cone"
+    "incoming_orientation": "upright_with_138mm_base_on_conveyor",
+    "approximation": "truncated_cone",
+    "radius_profile": "r(z)=69-9*z/62 mm, z measured upward from bottom plane",
+    "taper_half_angle_deg": 8.25943798,
+    "geometry_correction_date": "2026-08-26"
   },
   "line": {
     "rate_bowls_per_min": 160.0,
@@ -17,52 +20,70 @@
     "pitch_mm": 160.0,
     "axial_speed_mm_s": 426.6666667
   },
+  "timing_relations": {
+    "single_start_screw_rpm_at_baseline": 160.0,
+    "screw_rotation_per_bowl_deg": 360.0,
+    "three_arm_rotor_rpm_at_baseline": 26.6666667,
+    "rotor_rotation_per_bowl_deg": 60.0,
+    "rotor_rotation_per_flip_event_deg": 120.0,
+    "status": "timing relations remain valid after geometry correction"
+  },
+  "geometry_validation": {
+    "status": "REVALIDATION_REQUIRED",
+    "reason": "V6/V10.10/V11 were generated with reversed product taper (120 mm bottom / 138 mm top)",
+    "diagnostic_old_return_path_min_shaft_clearance_mm": 2.58,
+    "diagnostic_old_flip_path_min_shaft_clearance_mm": 4.11,
+    "previous_clearance_target_mm": 5.0,
+    "old_geometry_pass_claims_current": false
+  },
   "timing_screw": {
-    "baseline_version": "V11",
-    "rpm": 160.0,
+    "historical_baseline_version": "V11",
+    "status": "stale_pending_regeneration_for_corrected_bowl",
+    "rpm_at_160_bowls_min": 160.0,
     "starts": 1,
-    "blank_od_mm": 135.0,
+    "historical_blank_od_mm": 135.0,
     "shaft_od_mm": 25.0,
-    "axis_y_mm": -21.5,
-    "axis_z_mm": 26.5,
+    "historical_axis_y_mm": -21.5,
+    "historical_axis_z_mm": 26.5,
     "pitch_mm": 160.0,
     "principle": "positive longitudinal drive remains after bowl leaves conveyor",
-    "transfer_section": "asymmetric; preserve return-side drive material while opening selected-bowl crossover sector"
+    "transfer_section_principle": "asymmetric; preserve return-side drive material while opening selected-bowl crossover sector"
   },
   "preflip": {
-    "baseline_angle_deg": 52.0,
-    "status": "provisional pending real CG measurement"
+    "starting_angle_deg": 52.0,
+    "status": "provisional_pending_regenerated_geometry_and_real_CG",
+    "simple_tipping_estimate_deg": {
+      "cg_height_26mm": 69.35,
+      "cg_height_31mm": 65.81,
+      "cg_height_36mm": 62.45
+    }
   },
   "rotor": {
-    "baseline_version": "V10.10",
+    "historical_baseline_version": "V10.10",
+    "status": "concept_retained_clearance_results_stale",
     "arms": 3,
-    "rpm": 26.6666667,
+    "rpm_at_160_bowls_min": 26.6666667,
     "rotation_per_bowl_deg": 60.0,
     "rotation_per_flip_event_deg": 120.0,
-    "arm_order": [0, 2, 1],
-    "active_contact_window_s": 0.225,
-    "inactive_roller_park_z_mm": 170.0,
+    "arm_order_historical": [0, 2, 1],
+    "inactive_roller_park_z_mm_historical": 170.0,
     "contact_rule": "assigned roller tangent contact; no geometric penetration; wrong rollers must not touch"
   },
   "guides": {
-    "lift_return_guide": "supports weight and controls pose; not primary axial-drive source",
-    "receiving_guide": "controls selected bowl after transfer starts; no uncontrolled free flight"
-  },
-  "screening": {
-    "v10_10_status": "preliminary_pass",
-    "unflipped_to_any_roller_min_clearance_mm": 79.36,
-    "flip_to_wrong_roller_min_clearance_mm": 95.05,
-    "neighbor_bowl_min_clearance_mm": 22.0,
-    "bowl_to_shaft_min_clearance_mm_carried_forward": 5.09,
-    "intended_contact": "approximately zero gap within numerical point-cloud tolerance"
+    "principle": "lift/return guide and receiving guide remain required",
+    "historical_v6_curves_status": "stale_pending_regeneration",
+    "axial_drive_rule": "guides are not the primary axial-drive source after bowl leaves belt"
   },
   "simulation": {
-    "current_version": "V12",
-    "status": "known_bug",
-    "bug": "bowls can disappear after running briefly due to incomplete spawn/window/loop logic",
-    "approved_as_design_evidence": false
+    "current_version": "V12.3",
+    "continuous_spawn_fix": true,
+    "corrected_bowl_geometry_in_viewer": true,
+    "adjustable_rate_playback": true,
+    "approved_as_design_evidence": false,
+    "reason": "engineering trajectories and CAD are still pending regeneration for corrected bowl geometry"
   },
   "locked_rules": [
+    "bottom diameter is 138 mm and top diameter is 120 mm",
     "timing screw remains positive-drive master after bowl leaves belt",
     "do not open transfer relief before control takeover",
     "do not neck down full screw circumference in transfer zone",
@@ -72,16 +93,12 @@
     "animation must be trajectory-driven, not manually rotated for appearance",
     "AI concept renders are not engineering geometry"
   ],
-  "not_yet_validated": [
-    "real packed-product center of gravity and variation",
-    "friction coefficients",
-    "bowl stiffness/deformation",
-    "required contact force",
-    "shaft torque/deflection",
-    "bearing loads",
-    "fatigue",
-    "tolerance stack",
-    "sanitation/material details",
-    "physical prototype at 160 bowls/min"
+  "next_required_work": [
+    "regenerate bowl envelope and pose trajectories",
+    "regenerate lift/return and receiving guides",
+    "regenerate timing screw and verify positive drive/shaft clearance/transfer window",
+    "refit selected roller contact path",
+    "rerun multi-bowl collision sweep",
+    "create new geometry PASS checkpoint"
   ]
 }

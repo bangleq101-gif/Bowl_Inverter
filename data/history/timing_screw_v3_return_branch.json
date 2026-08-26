@@ -1,0 +1,21 @@
+{
+  "version": "V3_default_return_branch_and_dual_path_screw",
+  "product": {"top_diameter_mm": 138, "bottom_diameter_mm": 120, "height_mm": 62, "mass_g": 87},
+  "line": {"rate_bowls_min": 160, "pitch_mm": 160, "line_speed_mm_s": 426.667},
+  "default_unflipped_branch": {"start_x_mm": 640.0, "end_x_mm": 960.0, "length_mm": 320.0, "duration_s": 0.75, "tilt_start_deg": 52, "tilt_end_deg": 0, "lift_start_mm": 47, "lift_end_mm": 0, "profile": "quintic return", "lateral_shift_mm": 0, "principle": "No paddle contact. Return guide lowers/derotates bowl while timing screw remains the longitudinal master."},
+  "dual_path_screw_principle": {"requirement": "At x≈740–880 the same screw section must permit a flipped bowl to cross while preserving a default-side drive path for the unflipped bowl.", "section_strategy": "asymmetric circumferential section: preserve original-side drive lug/return rail; open relief only in opposite crossover sector.", "do_not_do": "Do not machine a full-circumference neck-down/relief.", "target_return_drive_axial_clearance_mm": 1.5, "target_transfer_clearance_mm": 6.0, "min_paddle_swept_envelope_clearance_to_unflipped_bowl_mm": 10.0},
+  "return_stations": [
+    {"x_mm":640,"bowl_tilt_deg":52.0,"pivot_lift_mm":47.0,"screw_control":"FULL DRIVE"},
+    {"x_mm":670,"bowl_tilt_deg":51.63,"pivot_lift_mm":46.67,"screw_control":"FULL DRIVE"},
+    {"x_mm":705,"bowl_tilt_deg":48.86,"pivot_lift_mm":44.16,"screw_control":"FULL DRIVE"},
+    {"x_mm":740,"bowl_tilt_deg":42.64,"pivot_lift_mm":38.54,"screw_control":"FULL DRIVE / DEFAULT-SIDE LUG"},
+    {"x_mm":780,"bowl_tilt_deg":32.03,"pivot_lift_mm":28.95,"screw_control":"DEFAULT-SIDE DRIVE LUG"},
+    {"x_mm":800,"bowl_tilt_deg":26.0,"pivot_lift_mm":23.5,"screw_control":"DEFAULT-SIDE DRIVE LUG"},
+    {"x_mm":840,"bowl_tilt_deg":14.31,"pivot_lift_mm":12.93,"screw_control":"DEFAULT-SIDE DRIVE LUG"},
+    {"x_mm":880,"bowl_tilt_deg":5.38,"pivot_lift_mm":4.87,"screw_control":"METERING FLANK RE-ENGAGE"},
+    {"x_mm":920,"bowl_tilt_deg":0.83,"pivot_lift_mm":0.75,"screw_control":"METERING FLANK"},
+    {"x_mm":960,"bowl_tilt_deg":0.0,"pivot_lift_mm":0.0,"screw_control":"METERING FLANK"}
+  ],
+  "acceptance": {"unflipped_bowl_never_crosses_screw": true, "unflipped_bowl_remains_original_side": true, "timing_screw_positive_drive_through_return": true, "return_to_upright_by_x_mm": 960, "paddle_min_swept_clearance_mm": 10, "no_free_flight": true, "normal_metering_profile_restored_after_x_mm": 960},
+  "status_note": "Historical development data. Later geometry changed, but the asymmetric dual-path/return-drive principle remains part of the current baseline."
+}

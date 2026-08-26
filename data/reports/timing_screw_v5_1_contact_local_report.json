@@ -1,0 +1,21 @@
+{
+  "version": "V5.1_positive_drive_local_validation",
+  "screw": {"od_mm":135,"shaft_od_mm":25,"axis_y_mm":-22.5,"axis_z_mm":27.5,"pitch_mm":160},
+  "criteria": {"active_flank_contact_by_plus_x_shift_mm":6,"shaft_margin_min_mm":6},
+  "all_pass": true,
+  "minimum_observed_shaft_margin_mm": 11.04,
+  "interpretation": "In the V5.1 helix orientation, +X relative bowl lag/contact diagnostic reaches the active drive flank; -X is the looser/opposite flank. Transfer clearance is held at 3mm through x=740 and ramps to 6mm by x=780.",
+  "station_summary": [
+    {"x_mm":620,"theta_deg":51.98,"shaft_margin_mm":44.856,"positive_drive_pass":true},
+    {"x_mm":646,"theta_deg":52.0,"shaft_margin_mm":44.837,"positive_drive_pass":true},
+    {"x_mm":670,"theta_deg":51.63,"shaft_margin_mm":45.168,"positive_drive_pass":true},
+    {"x_mm":706,"theta_deg":48.73,"shaft_margin_mm":47.306,"positive_drive_pass":true},
+    {"x_mm":742,"theta_deg":42.18,"shaft_margin_mm":48.953,"positive_drive_pass":true},
+    {"x_mm":778,"theta_deg":32.62,"shaft_margin_mm":43.159,"positive_drive_pass":true},
+    {"x_mm":802,"theta_deg":25.39,"shaft_margin_mm":32.41,"positive_drive_pass":true},
+    {"x_mm":838,"theta_deg":14.85,"shaft_margin_mm":11.04,"positive_drive_pass":true},
+    {"x_mm":886,"theta_deg":4.41,"shaft_margin_mm":14.225,"positive_drive_pass":true},
+    {"x_mm":922,"theta_deg":0.72,"shaft_margin_mm":15.627,"positive_drive_pass":true},
+    {"x_mm":958,"theta_deg":0.0,"shaft_margin_mm":15.723,"positive_drive_pass":true}
+  ]
+}

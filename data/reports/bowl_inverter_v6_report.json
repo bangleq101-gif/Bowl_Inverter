@@ -1,0 +1,11 @@
+{
+  "version": "V6_guides_and_paddle_contact_path",
+  "inputs": {"screw":"timing_screw_v5_1_positive_drive.step","bowl":"ODtop138_ODbottom120_H62_mass87g","rate_cpm":160},
+  "guide_geometry": {
+    "lift_return_guide": "6mm-radius prototype rail following a point 3mm under upper rim on side opposite screw; common path into 52deg and return branch back to 0deg",
+    "receiving_guide": "6mm-radius prototype rail following lowest bowl support envelope on FLIP branch from x=706..922",
+    "paddle_contact_path": "3mm-radius visualization of desired pushing-side contact path from x=706..802; not yet a physical arm"
+  },
+  "paddle_circle_fit_xy": {"center_x_mm":666.6372858550081,"center_y_mm":17.597805962719576,"radius_mm":125.33134427152848,"rms_error_mm":7.372488746160477,"max_abs_error_mm":11.018986391076226},
+  "interpretation": "The desired paddle contact path is only approximately circular. Do not lock a constant-radius 3-arm wheel until the contact path is refit with servo cam/arm geometry."
+}

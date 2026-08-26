@@ -17,6 +17,7 @@ at **160 bowls/min**.
 3. [`docs/DECISIONS_AND_FAILURES.md`](docs/DECISIONS_AND_FAILURES.md) – rejected concepts and why each failed. Do not silently reintroduce them.
 4. [`docs/NEXT_WORK_PLAN.md`](docs/NEXT_WORK_PLAN.md) – next engineering tasks and acceptance criteria.
 5. [`data/current_baseline.json`](data/current_baseline.json) – machine-readable baseline for agents/scripts.
+6. [`simulation/V12_BUG_ANALYSIS.md`](simulation/V12_BUG_ANALYSIS.md) – exact root cause of the disappearing-bowl viewer bug and V12.1 acceptance criteria.
 
 ## Product
 
@@ -87,12 +88,25 @@ Known issue reported during the session:
 
 > bowls run for a short time and then disappear.
 
-Cause: continuous spawning/window/loop logic is incomplete.
+Root cause: the old frame loop used an ever-increasing `xref` together with a fixed local index range (`-12..3`). Eventually all candidate bowls moved beyond the visible X window, so no new products were spawned.
 
-See:
+The fix is recorded separately so it cannot be confused with a mechanical redesign:
 
+- [`simulation/V12_BUG_ANALYSIS.md`](simulation/V12_BUG_ANALYSIS.md)
+- [`simulation/v12_spawn_fix.js`](simulation/v12_spawn_fix.js)
 - [`simulation/v12_report.json`](simulation/v12_report.json)
-- [`docs/NEXT_WORK_PLAN.md`](docs/NEXT_WORK_PLAN.md)
+
+The spawning fix must preserve the absolute bowl index/parity and must not change the validated COMMON / RETURN / FLIP pose data just to make the animation look continuous.
+
+## Regression / sanity check
+
+Run after cloning:
+
+```bash
+python scripts/validate_baseline.py
+```
+
+The script checks the line timing/phase relationship and the currently stored V11 validation invariants. See [`scripts/README.md`](scripts/README.md).
 
 ## Historical development data
 
@@ -101,6 +115,16 @@ Preserved so future work does not lose the reasoning path:
 - [`data/history/timing_screw_v1_sections.json`](data/history/timing_screw_v1_sections.json)
 - [`data/history/timing_screw_v2_1_transfer.json`](data/history/timing_screw_v2_1_transfer.json)
 - [`data/history/timing_screw_v3_return_branch.json`](data/history/timing_screw_v3_return_branch.json)
+- [`data/archive/historical_small_artifacts.json`](data/archive/historical_small_artifacts.json) – station/contact tables from multiple intermediate versions.
+
+## CAD / binary artifact traceability
+
+Large CAD/mesh/archive files generated during the session are tracked by exact filename, byte count and SHA-256 in:
+
+- [`docs/BINARY_ARTIFACT_CHECKSUMS.json`](docs/BINARY_ARTIFACT_CHECKSUMS.json)
+- [`docs/ARTIFACT_MANIFEST.md`](docs/ARTIFACT_MANIFEST.md)
+
+This prevents later files from being mistaken for the approved checkpoint even when binary transfer/storage is handled separately.
 
 ## Critical rules that must not be broken silently
 

@@ -1,0 +1,36 @@
+{
+  "version": "V11_regenerated_corrected_axis",
+  "screw": {
+    "od_mm": 135.0,
+    "shaft_od_mm": 25.0,
+    "axis_y_mm": -21.5,
+    "axis_z_mm": 26.5,
+    "pitch_mm": 160.0,
+    "x_min_mm": -190.0,
+    "x_max_mm": 1060.0
+  },
+  "generation": {
+    "method": "new blank minus swept bowl envelopes transformed into screw rotating frame",
+    "pose_samples_used": 92,
+    "samples_by_branch": {
+      "COMMON": 34,
+      "FLIP": 27,
+      "RETURN": 27,
+      "EXIT": 4
+    },
+    "not_a_translated_v5_1": true
+  },
+  "validation": {
+    "positive_drive_all_pass": true,
+    "shaft_all_pass": true,
+    "min_shaft_margin_mm": 12.451504010245774,
+    "max_nominal_gap_mm": 3.190565200817439
+  },
+  "transfer_sections": [
+    {"x_mm": 742, "solid_volume_mm3": 4762.949320082021, "full_annulus_volume_mm3": 13823.00767579509, "material_fraction": 0.3445667854487435},
+    {"x_mm": 778, "solid_volume_mm3": 6276.791560996753, "full_annulus_volume_mm3": 13823.00767579509, "material_fraction": 0.4540829107682396},
+    {"x_mm": 838, "solid_volume_mm3": 7364.486527630937, "full_annulus_volume_mm3": 13823.00767579509, "material_fraction": 0.5327701973664235}
+  ],
+  "status": "PASS",
+  "limits": "Kinematic/CAD envelope model. Final machining geometry still requires tolerance, stiffness, material, bearing and food-machine detailing."
+}

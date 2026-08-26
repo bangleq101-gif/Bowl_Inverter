@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Repository-level sanity checks for the Bowl Inverter engineering baseline.
 
-This script checks invariant timing formulas and the corrected bowl geometry.
-It intentionally does NOT claim that historical V6/V10.10/V11 CAD is currently
-valid after the 2026-08-26 bowl taper correction.
+This script checks invariant timing formulas, corrected bowl geometry, and the
+current flip-direction/trigger-role decisions. It intentionally does NOT claim
+that historical V6/V10.10/V11 CAD is currently valid after the 2026-08-26
+geometry and rotation-direction corrections.
 """
 
 from __future__ import annotations
@@ -76,15 +77,29 @@ def main() -> None:
     require(float(gv["diagnostic_old_flip_path_min_shaft_clearance_mm"]) < 5.0,
             "diagnostic should record why the old FLIP path was invalidated")
 
-    print("PASS: corrected baseline timing/geometry metadata sanity checks")
-    print(f"  bottom / top diameter  : 138 / 120 mm")
+    # Rotation direction and transfer-actuator role corrected after user review.
+    rotation = baseline["rotation_direction"]
+    require(rotation["viewer_expected_selected_flip"] == "counter_clockwise",
+            "selected bowl viewer direction must remain counter-clockwise until V13 proves otherwise")
+    require("stale" in rotation["old_positive_52_to_180_branch_status"],
+            "old positive 52->180 angular branch must remain marked stale")
+
+    actuator = baseline["transfer_actuator"]
+    require(actuator["new_role"] == "brief_tangent_trigger_not_continuous_flipping_paddle",
+            "selected actuator must remain a brief trigger, not a continuous flipping paddle")
+    require(actuator["no_free_flight"] is True, "selected bowl must not use uncontrolled free flight")
+
+    print("PASS: corrected baseline timing/geometry/direction metadata sanity checks")
+    print("  bottom / top diameter  : 138 / 120 mm")
     print(f"  taper half-angle       : {taper:.3f} deg")
     print(f"  bowl interval          : {bowl_dt:.3f} s")
     print(f"  line speed             : {line_speed:.3f} mm/s")
     print(f"  screw deg / bowl       : {screw_deg_per_bowl:.1f}")
     print(f"  rotor deg / bowl       : {rotor_deg_per_bowl:.1f}")
     print(f"  rotor deg / flip event : {rotor_deg_per_flip:.1f}")
-    print("STATUS: timing relations PASS; mechanical geometry REVALIDATION REQUIRED")
+    print("  selected flip viewer   : counter-clockwise")
+    print("  transfer actuator role : brief tangent trigger")
+    print("STATUS: timing relations PASS; mechanical geometry/force trajectory REVALIDATION REQUIRED")
     print("NOTE: do not use historical V11/V10.10 clearance/contact PASS as current design evidence.")
 
 

@@ -75,13 +75,13 @@ The **principle remains mandatory**, but the V11 solid must be regenerated from 
 
 The screw remains the longitudinal phase master after the bowl leaves the conveyor.
 
-It must retain a drive flank/lug until roller/paddle and receiving guide have established positive control.
+It must retain a drive flank/lug until trigger roller and receiving guide have established positive control.
 
 Do not open full relief early.
 
 ## Pre-flip branch
 
-Current provisional pre-flip angle remains **~52°** as a starting point, not a frozen value.
+Current provisional pre-flip angle magnitude remains **~52°** as a starting point, not a frozen value.
 
 With corrected base radius 69 mm, a simple static edge-pivot estimate gives approximate tipping angles:
 
@@ -91,20 +91,49 @@ With corrected base radius 69 mm, a simple static edge-pivot estimate gives appr
 
 Thus 52° remains below this simple estimate for the previously assumed CG range. Real packed-product CG must still be measured.
 
+The **sign/direction** of the pre-flip angle must be re-solved so it is continuous with the physical selected-bowl CCW inversion branch.
+
+## Selected-bowl rotation direction – corrected 2026-08-26
+
+The selected bowl should visibly invert **counter-clockwise (CCW)** in the current viewer convention. The previous playback showed the selected bowl rotating clockwise and that angular branch is now stale.
+
+For the intended transfer, the trigger gives a small lateral push across the screw rather than forcing the bowl through most of the inversion. With the current engineering axes, if the bowl crosses toward `+Y` and the trigger acts above the center of mass with an approximately lateral force `F_y > 0`, then:
+
+`M_x = r_y F_z - r_z F_y ≈ -r_z F_y < 0`
+
+Therefore the old increasing positive-angle `~+52° -> +180°` selected-bowl branch does not match the intended trigger moment sign. The exact numeric sign depends on coordinate/view convention; the physical requirement is that the V13 angular motion be consistent with the actual force moment and appear CCW in the current viewer.
+
+See `docs/ROTATION_DIRECTION_CORRECTION_2026-08-26.md`.
+
+## Transfer actuator – revised role
+
+The selected-bowl roller/paddle is now treated as a **brief tangent trigger**, not a continuous flipping paddle.
+
+Required control sequence:
+
+1. screw + lift guide retain positive control to pre-flip;
+2. trigger roller gives only enough lateral impulse/displacement to initiate crossover/tipping;
+3. receiving guide captures the bowl early;
+4. receiving-guide geometry + gravity/contact reaction control most of the CCW inversion;
+5. trigger retracts early;
+6. no free flight and no rigid penetration.
+
+The old V10.10 contact window of ~0.225 s is **not** a requirement anymore. V13 must minimize and re-solve the contact interval from actual geometry/force needs.
+
 ## Selected and return branches
 
-The previously stored X stations and pose trajectories are now **historical references only** until regenerated with the corrected product taper.
+The previously stored X stations and pose trajectories are now **historical references only** until regenerated with the corrected product taper and CCW selected-bowl branch.
 
 The logical control sequence is retained:
 
 1. capture/metering;
 2. lift + positive screw drive;
 3. pre-flip;
-4. selected-bowl transfer contact;
+4. brief selected-bowl trigger contact;
 5. positive-control overlap;
 6. asymmetric transfer relief;
-7. receiving-guide takeover;
-8. selected bowl -> inverted output, non-selected bowl -> upright return.
+7. early receiving-guide takeover;
+8. selected bowl -> CCW inverted output, non-selected bowl -> upright return.
 
 ## Rotor/roller – historical V10.10, now stale for corrected product geometry
 
@@ -114,16 +143,16 @@ The concept is retained:
 - baseline timing relation **26.667 rpm at 160 bowls/min**
 - only correctly phased roller enters product zone
 - inactive rollers retract upward
-- intended selected-bowl contact is tangent/controlled contact
+- intended selected-bowl contact is brief tangent/controlled trigger contact
 - wrong/non-active rollers must not touch any bowl
 - rigid geometric penetration is not accepted
 
-However the V10.10 clearance numbers were calculated with the old product surface and must be recomputed after the new bowl trajectory is solved.
+However the V10.10 clearance numbers and long contact path were calculated with the old product surface/direction and must be recomputed after the new bowl trajectory is solved.
 
 ## Guide principle retained
 
 1. **Lift/return guide** supports weight and controls pose.
-2. **Receiving guide** controls the selected bowl after transfer starts.
+2. **Receiving guide** must take over the selected bowl early and control most of the inversion after the trigger.
 3. Guides must not become the primary axial-drive source while the bowl is off the belt.
 4. No uncontrolled free flight.
 
@@ -137,17 +166,20 @@ Continuous spawning bug was corrected conceptually by using absolute bowl indexe
 
 ### V12.3
 
-Viewer geometry is corrected to **Ø138 bottom / Ø120 top**, with a clearer conveyor surface and adjustable bowls/min playback timing.
+Viewer geometry was corrected to **Ø138 bottom / Ø120 top**, with a clearer conveyor surface and adjustable bowls/min playback timing.
 
-Important: V12.3 is a **geometry-orientation / continuity preview**, not design evidence for guide/screw/roller clearance because the engineering trajectories are still awaiting regeneration.
+### V12.4 direction preview
+
+Viewer selected-bowl angular display is changed to **CCW** to preview the corrected physical direction. This remains a direction/concept preview only: center paths, guides, screw and roller geometry are still historical until V13 regeneration.
 
 ## Not frozen yet
 
 - real CG and product variation
-- regenerated pre-flip/return/flip trajectories
+- exact pre-flip sign/magnitude
+- regenerated CCW return/flip trajectories
 - timing-screw final OD/axis/groove for corrected taper
 - exact guide cross-sections
-- contact force profile
+- trigger contact point/force/duration
 - roller geometry/material
 - rotor bearing arrangement
 - shaft sizing
@@ -161,7 +193,7 @@ Important: V12.3 is a **geometry-orientation / continuity preview**, not design 
 
 Do not release for fabrication until at least:
 
-1. corrected product geometry is propagated through all trajectories/CAD;
+1. corrected product geometry and CCW rotation direction are propagated through all trajectories/CAD;
 2. real-product CG and variation are measured;
 3. force/contact model is validated;
 4. screw/guide/roller collision sweep passes with tolerances;

@@ -1,0 +1,31 @@
+{
+  "version": "geometry_correction_2026-08-26",
+  "product": {
+    "bottom_diameter_mm": 138,
+    "top_diameter_mm": 120,
+    "height_mm": 62,
+    "mass_g": 87
+  },
+  "radius_profile_from_bottom_z_mm": "r(z)=69 - 9*z/62, 0<=z<=62",
+  "taper_half_angle_deg": 8.25943798,
+  "timing_unchanged": {
+    "pitch_mm": 160,
+    "rate_bowls_min": 160,
+    "bowl_interval_s": 0.375,
+    "line_speed_mm_s": 426.6666667,
+    "screw_rpm": 160,
+    "rotor_rpm": 26.6666667
+  },
+  "static_tipping_estimates_deg": {
+    "cg_26mm": 69.35,
+    "cg_31mm": 65.81,
+    "cg_36mm": 62.45
+  },
+  "diagnostic_using_old_trajectories_only": {
+    "neighbor_bowl_min_clearance_mm_approx": 22.0,
+    "return_branch_min_shaft_clearance_mm_approx": 2.58,
+    "flip_branch_min_shaft_clearance_mm_approx": 4.11,
+    "status": "FAIL_FOR_CURRENT_GEOMETRY",
+    "meaning": "Old V6/V10.10/V11 geometry must be regenerated. Diagnostic only, not a new validated design."
+  }
+}

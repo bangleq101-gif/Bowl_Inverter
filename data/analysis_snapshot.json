@@ -1,0 +1,109 @@
+{
+  "checkpoint_date": "2026-08-26",
+  "project": "Bowl_Inverter",
+  "product": {
+    "top_diameter_mm": 138,
+    "bottom_diameter_mm": 120,
+    "height_mm": 62,
+    "mass_g": 87,
+    "incoming_orientation": "upright"
+  },
+  "production": {
+    "rate_bowls_per_min": 160,
+    "bowl_interval_s": 0.375,
+    "pitch_mm": 160,
+    "line_speed_mm_s": 426.6666667,
+    "flip_event_interval_s": 0.75
+  },
+  "current_baseline": {
+    "timing_screw_rpm": 160,
+    "timing_screw_blank_od_mm": 135,
+    "shaft_od_mm": 25,
+    "screw_axis_y_mm": -21.5,
+    "screw_axis_z_mm": 26.5,
+    "rotor_arms": 3,
+    "rotor_rpm": 26.6666667,
+    "inactive_roller_park_z_mm": 170,
+    "modeled_arm_order": [0, 2, 1],
+    "active_roller_contact_s": 0.225
+  },
+  "critical_rules": [
+    "Timing screw remains the longitudinal phase/master element even after the bowl is fully lifted off the conveyor.",
+    "Lift/return guide supports and controls pose but must not become the primary axial-drive mechanism through friction.",
+    "Transfer relief must not open fully before paddle/roller and receiving guide take positive control.",
+    "Transfer screw section must be circumferentially asymmetric so return-side positive drive remains available for the non-selected bowl.",
+    "No uncontrolled free flight.",
+    "Wrong/non-active roller must not touch any bowl.",
+    "Rigid CAD geometry must not penetrate the product; selected roller contact is tangent/controlled contact only."
+  ],
+  "representative_transfer_stations": [
+    {"x_mm": 640, "tilt_deg": 52, "lateral_mm": 0, "state": "pre-flip; screw full drive"},
+    {"x_mm": 670, "tilt_deg": 52, "lateral_mm": 0, "state": "first paddle/roller contact; screw full drive"},
+    {"x_mm": 705, "tilt_deg": 58, "lateral_mm": 15, "state": "control overlap"},
+    {"x_mm": 740, "tilt_deg": 65, "lateral_mm": 35, "state": "last full-drive region"},
+    {"x_mm": 780, "tilt_deg": 78, "lateral_mm": 58, "state": "trailing drive lug / relief opens"},
+    {"x_mm": 840, "tilt_deg": 110, "lateral_mm": 100, "state": "crossover; screw released from selected bowl"},
+    {"x_mm": 920, "tilt_deg": 180, "lateral_mm": 120, "state": "inverted exit target"}
+  ],
+  "representative_return_stations": [
+    {"x_mm": 640, "tilt_deg": 52, "lift_mm": 47},
+    {"x_mm": 705, "tilt_deg": 48.86, "lift_mm": 44.16},
+    {"x_mm": 740, "tilt_deg": 42.64, "lift_mm": 38.54},
+    {"x_mm": 780, "tilt_deg": 32.03, "lift_mm": 28.95},
+    {"x_mm": 840, "tilt_deg": 14.31, "lift_mm": 12.93},
+    {"x_mm": 880, "tilt_deg": 5.38, "lift_mm": 4.87},
+    {"x_mm": 960, "tilt_deg": 0, "lift_mm": 0}
+  ],
+  "v6_contact_path_fit": {
+    "approx_circle_radius_mm": 125.33,
+    "rms_error_mm": 7.37,
+    "max_abs_error_mm": 11.02,
+    "conclusion": "desired paddle path is not a perfect constant-radius circle"
+  },
+  "v8_screening": {
+    "selected_bowl_clearance_min_mm": 0.166,
+    "selected_bowl_clearance_max_mm": 4.656,
+    "minimum_adjacent_unflipped_clearance_mm": 61.607
+  },
+  "v9_screening": {
+    "selected_bowl_to_lower_link_min_mm": 5.549,
+    "selected_bowl_to_vertical_post_min_mm": 25.585,
+    "adjacent_unflipped_to_lower_link_min_mm": 70.815,
+    "adjacent_unflipped_to_vertical_post_min_mm": 69.815
+  },
+  "v10_10_screening": {
+    "status": "PRELIMINARY_KINEMATIC_PASS",
+    "unflipped_to_any_roller_min_mm": 79.3577,
+    "flip_to_wrong_roller_min_mm": 95.0464,
+    "assigned_contact_min_mm_discrete": -0.0916,
+    "assigned_contact_max_mm_discrete": 0.0686,
+    "neighbor_bowl_min_mm_carried_forward": 22.0,
+    "shaft_min_mm_carried_forward": 5.0947,
+    "interpretation": "assigned contact is intended tangent zero-gap; small negative value is point-cloud discretization tolerance, not permitted design penetration"
+  },
+  "v11": {
+    "status": "REGENERATED_FINAL_AXIS_BASELINE",
+    "blank_od_mm": 135,
+    "shaft_od_mm": 25,
+    "axis_y_mm": -21.5,
+    "axis_z_mm": 26.5,
+    "reported_positive_drive_validation": "PASS",
+    "reported_min_shaft_margin_mm": 12.45
+  },
+  "v12": {
+    "status": "KNOWN_BUG",
+    "bug": "bowls run briefly then disappear",
+    "required_fix": "continuous spawn/recycle logic while preserving 0.375 s product phase and alternating flip assignment"
+  },
+  "still_unvalidated": [
+    "actual packaged-product CG distribution",
+    "bowl/lid stiffness and deformation",
+    "friction coefficients",
+    "true roller contact force and impact",
+    "cam jerk/follower dynamics",
+    "screw torque and shaft deflection",
+    "rotor and bearing loads",
+    "wear and tolerance stack",
+    "food-grade sanitation and guarding details"
+  ]
+}

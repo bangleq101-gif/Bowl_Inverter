@@ -30,15 +30,27 @@
   },
   "geometry_validation": {
     "status": "REVALIDATION_REQUIRED",
-    "reason": "V6/V10.10/V11 were generated with reversed product taper (120 mm bottom / 138 mm top)",
+    "reason": "V6/V10.10/V11 were generated with reversed product taper and the old selected-bowl angular branch had the wrong moment sign for the intended trigger push",
     "diagnostic_old_return_path_min_shaft_clearance_mm": 2.58,
     "diagnostic_old_flip_path_min_shaft_clearance_mm": 4.11,
     "previous_clearance_target_mm": 5.0,
     "old_geometry_pass_claims_current": false
   },
+  "rotation_direction": {
+    "viewer_expected_selected_flip": "counter_clockwise",
+    "engineering_rule": "solve angular sign from actual trigger force moment about X; for lateral +Y trigger above CG, Mx is negative in the current right-hand coordinate frame",
+    "old_positive_52_to_180_branch_status": "stale_wrong_sign_for_intended_trigger_contact",
+    "status": "must_be_regenerated_in_V13"
+  },
+  "transfer_actuator": {
+    "new_role": "brief_tangent_trigger_not_continuous_flipping_paddle",
+    "contact_duration": "to_be_minimized_and_resolved_in_V13; do not inherit old 0.225 s as a requirement",
+    "takeover_rule": "receiving guide must establish positive control before trigger release and before transfer relief can cause loss of control",
+    "no_free_flight": true
+  },
   "timing_screw": {
     "historical_baseline_version": "V11",
-    "status": "stale_pending_regeneration_for_corrected_bowl",
+    "status": "stale_pending_regeneration_for_corrected_bowl_and_ccw_branch",
     "rpm_at_160_bowls_min": 160.0,
     "starts": 1,
     "historical_blank_od_mm": 135.0,
@@ -50,7 +62,8 @@
     "transfer_section_principle": "asymmetric; preserve return-side drive material while opening selected-bowl crossover sector"
   },
   "preflip": {
-    "starting_angle_deg": 52.0,
+    "starting_angle_deg_magnitude": 52.0,
+    "rotation_sign": "pending V13 solve; must be continuous with the physical CCW selected-flip branch",
     "status": "provisional_pending_regenerated_geometry_and_real_CG",
     "simple_tipping_estimate_deg": {
       "cg_height_26mm": 69.35,
@@ -60,45 +73,50 @@
   },
   "rotor": {
     "historical_baseline_version": "V10.10",
-    "status": "concept_retained_clearance_results_stale",
+    "status": "concept_retained_clearance_and_long_contact_results_stale",
     "arms": 3,
     "rpm_at_160_bowls_min": 26.6666667,
     "rotation_per_bowl_deg": 60.0,
     "rotation_per_flip_event_deg": 120.0,
     "arm_order_historical": [0, 2, 1],
     "inactive_roller_park_z_mm_historical": 170.0,
-    "contact_rule": "assigned roller tangent contact; no geometric penetration; wrong rollers must not touch"
+    "contact_rule": "assigned trigger roller tangent contact only; no geometric penetration; wrong rollers must not touch"
   },
   "guides": {
     "principle": "lift/return guide and receiving guide remain required",
-    "historical_v6_curves_status": "stale_pending_regeneration",
-    "axial_drive_rule": "guides are not the primary axial-drive source after bowl leaves belt"
+    "historical_v6_curves_status": "stale_pending_regeneration_for_corrected_bowl_and_ccw_branch",
+    "axial_drive_rule": "guides are not the primary axial-drive source after bowl leaves belt",
+    "receiving_guide_role": "take over selected bowl early and control most of the inversion after brief trigger contact"
   },
   "simulation": {
-    "current_version": "V12.3",
+    "current_version": "V12.4_direction_preview",
     "continuous_spawn_fix": true,
     "corrected_bowl_geometry_in_viewer": true,
     "adjustable_rate_playback": true,
+    "selected_flip_display_direction": "counter_clockwise",
     "approved_as_design_evidence": false,
-    "reason": "engineering trajectories and CAD are still pending regeneration for corrected bowl geometry"
+    "reason": "center trajectories/guides/screw/roller geometry still require V13 regeneration for corrected product and flip direction"
   },
   "locked_rules": [
     "bottom diameter is 138 mm and top diameter is 120 mm",
+    "selected bowl flips counter-clockwise in the current viewer convention",
+    "trigger roller gives only a brief tangent trigger; receiving guide controls the remaining inversion",
     "timing screw remains positive-drive master after bowl leaves belt",
     "do not open transfer relief before control takeover",
     "do not neck down full screw circumference in transfer zone",
     "no uncontrolled free flight",
     "wrong/non-active rollers must not touch bowls",
     "no rigid geometric penetration",
-    "animation must be trajectory-driven, not manually rotated for appearance",
+    "animation must be trajectory-driven, not manually rotated for appearance once V13 data exists",
     "AI concept renders are not engineering geometry"
   ],
   "next_required_work": [
-    "regenerate bowl envelope and pose trajectories",
+    "define trigger force direction/contact point and solve moment sign",
+    "regenerate bowl envelope and CCW pose trajectories",
     "regenerate lift/return and receiving guides",
     "regenerate timing screw and verify positive drive/shaft clearance/transfer window",
-    "refit selected roller contact path",
+    "refit short selected trigger-roller contact path",
     "rerun multi-bowl collision sweep",
-    "create new geometry PASS checkpoint"
+    "create new geometry/contact PASS checkpoint"
   ]
 }

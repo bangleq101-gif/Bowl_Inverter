@@ -10,133 +10,98 @@ All bowls enter upright. Output must alternate:
 
 at **160 bowls/min**.
 
-## Read these first
+## Important geometry correction
 
-1. [`docs/CONVERSATION_SUMMARY.md`](docs/CONVERSATION_SUMMARY.md) – complete technical recap of the conversation, from the initial ideas through V12.
-2. [`docs/CURRENT_ENGINEERING_BASELINE.md`](docs/CURRENT_ENGINEERING_BASELINE.md) – current source of truth for dimensions, speeds, mechanism and validation status.
-3. [`docs/DECISIONS_AND_FAILURES.md`](docs/DECISIONS_AND_FAILURES.md) – rejected concepts and why each failed. Do not silently reintroduce them.
-4. [`docs/NEXT_WORK_PLAN.md`](docs/NEXT_WORK_PLAN.md) – next engineering tasks and acceptance criteria.
-5. [`data/current_baseline.json`](data/current_baseline.json) – machine-readable baseline for agents/scripts.
-6. [`simulation/V12_BUG_ANALYSIS.md`](simulation/V12_BUG_ANALYSIS.md) – exact root cause of the disappearing-bowl viewer bug and V12.1 acceptance criteria.
-7. [`docs/CODEX_HANDOFF.md`](docs/CODEX_HANDOFF.md) – mandatory handoff/read order for Codex or another engineering agent.
-8. [`docs/UPLOAD_STATUS.md`](docs/UPLOAD_STATUS.md) – what is actually stored in GitHub versus binary artifacts tracked only by checksum.
-9. [`cad/README.md`](cad/README.md) – CAD lineage, current preferred checkpoint and binary verification workflow.
+The product taper direction was corrected on 2026-08-26:
 
-## Product
-
-- Top diameter: **138 mm**
-- Bottom diameter: **120 mm**
+- **Bottom / conveyor-contact diameter: 138 mm**
+- **Top diameter: 120 mm**
 - Height: **62 mm**
 - Mass: **87 g**
-- Incoming orientation: upright
 
-## Locked line baseline
+This correction invalidates the old V6/V10.10/V11 geometry PASS claims until the guide, screw and roller paths are regenerated.
 
-- Throughput: **160 bowls/min**
+Read [`docs/GEOMETRY_CORRECTION_2026-08-26.md`](docs/GEOMETRY_CORRECTION_2026-08-26.md) before using historical CAD validation numbers.
+
+## Read these first
+
+1. [`docs/CURRENT_ENGINEERING_BASELINE.md`](docs/CURRENT_ENGINEERING_BASELINE.md) – current source of truth.
+2. [`docs/GEOMETRY_CORRECTION_2026-08-26.md`](docs/GEOMETRY_CORRECTION_2026-08-26.md) – corrected Ø138-bottom / Ø120-top geometry and its consequences.
+3. [`docs/CONVERSATION_SUMMARY.md`](docs/CONVERSATION_SUMMARY.md) – historical technical recap.
+4. [`docs/DECISIONS_AND_FAILURES.md`](docs/DECISIONS_AND_FAILURES.md) – rejected concepts and failure reasons.
+5. [`data/current_baseline.json`](data/current_baseline.json) – machine-readable current baseline.
+6. [`docs/CODEX_HANDOFF.md`](docs/CODEX_HANDOFF.md) – handoff rules for Codex/another agent.
+7. [`docs/UPLOAD_STATUS.md`](docs/UPLOAD_STATUS.md) and [`cad/README.md`](cad/README.md) – artifact status and CAD lineage.
+
+## Timing relations retained
+
+At the 160 bowls/min baseline:
+
 - Bowl interval: **0.375 s**
 - Flip event interval: **0.75 s**
 - Pitch: **160 mm**
 - Axial speed: **426.667 mm/s**
-- Timing screw: **160 rpm**
+- Single-start timing screw: **160 rpm**
 - 3-arm rotor: **26.667 rpm**
+- Screw rotation per bowl: **360°**
+- Rotor rotation per bowl: **60°**
+- Rotor rotation per flip event: **120°**
 
-## Current mechanism principle
+These timing formulas remain valid after the product geometry correction.
+
+## Mechanism principle retained
 
 1. Timing screw meters every bowl and remains the longitudinal phase master.
-2. Lift/return guide raises and tilts the bowl toward a provisional pre-flip angle around 52°.
+2. Lift/return guide raises and tilts the bowl toward a provisional pre-flip angle.
 3. Even after the bowl is fully off the conveyor, the timing screw must still provide positive longitudinal drive.
-4. A non-selected bowl follows the return guide back toward upright while the screw continues driving it.
-5. A selected bowl is engaged by the correctly phased transfer roller/paddle.
-6. Receiving guide positively controls the bowl through the crossover/inversion region; no uncontrolled free flight.
-7. Transfer relief opens only after takeover is established.
-8. The screw transfer region is asymmetric so return-side drive material remains available while the selected bowl crosses.
+4. Non-selected bowls return toward upright while still screw-driven.
+5. Selected bowls are engaged by a correctly phased transfer roller/paddle.
+6. Receiving guide positively controls the crossover/inversion; no uncontrolled free flight.
+7. Transfer relief opens only after positive takeover.
+8. The screw transfer region remains circumferentially asymmetric so return-side drive material survives.
 
-## Current timing screw – V11
+## Current geometry-validation status
 
-- Blank OD: **135 mm**
-- Shaft OD: **25 mm**
-- Corrected axis: **Y=-21.5 mm, Z=26.5 mm**
-- Pitch: **160 mm**
-- Generated from swept bowl envelopes in the rotating screw frame
-- Positive-drive and shaft checks: current V11 report = **PASS**
+**REVALIDATION REQUIRED.**
 
-Key files:
+The previous V11 screw and V10.10 roller-clearance checkpoint were generated with the wrong taper direction.
 
-- [`data/v11/timing_screw_v11_report.json`](data/v11/timing_screw_v11_report.json)
-- [`data/v11/timing_screw_v11_validation.csv`](data/v11/timing_screw_v11_validation.csv)
-- [`data/v11/timing_screw_v11_transfer_sections.csv`](data/v11/timing_screw_v11_transfer_sections.csv)
+A diagnostic using the corrected bowl on old trajectories found approximately:
 
-## Current transfer actuator – V10.10
+- RETURN old-path minimum bowl-to-shaft clearance: **2.58 mm**
+- FLIP old-path minimum bowl-to-shaft clearance: **4.11 mm**
 
-The broad rigid-paddle approach was rejected. Current concept is a **selective high-retract roller**:
+The previous target was >=5 mm, so historical geometry must not be treated as current PASS evidence.
 
-- 3 arms
-- 26.667 rpm
-- arm order for modeled rotation: **0 -> 2 -> 1**
-- active transfer window ≈ **0.225 s**
-- inactive rollers retract to about **Z=170 mm** above the product envelope
-- assigned roller contact is tangent/controlled contact
-- wrong/non-active rollers must not touch any bowl
-- rigid geometric penetration is not accepted
+Historical V6/V10.10/V11 artifacts are preserved for engineering history and comparison only.
 
-Current screening report:
+## Simulation status
 
-- [`data/v10/v10_10_report.json`](data/v10/v10_10_report.json)
+- V12 original: had a continuous-spawning bug where bowls disappeared after running briefly.
+- V12.1: spawning logic corrected using absolute product index/parity.
+- V12.3: viewer uses **Ø138 bottom / Ø120 top**, clearer conveyor surfaces, 16:9 frame and adjustable bowls/min playback timing.
 
-## Simulation status – V12
+V12.3 is currently an orientation/continuity preview, **not** clearance/contact design evidence until corrected mechanical trajectories are regenerated.
 
-V12 web playback is **not approved yet**.
+## Sanity check
 
-Known issue reported during the session:
-
-> bowls run for a short time and then disappear.
-
-Root cause: the old frame loop used an ever-increasing `xref` together with a fixed local index range (`-12..3`). Eventually all candidate bowls moved beyond the visible X window, so no new products were spawned.
-
-The fix is recorded separately so it cannot be confused with a mechanical redesign:
-
-- [`simulation/V12_BUG_ANALYSIS.md`](simulation/V12_BUG_ANALYSIS.md)
-- [`simulation/v12_spawn_fix.js`](simulation/v12_spawn_fix.js)
-- [`simulation/v12_report.json`](simulation/v12_report.json)
-
-The spawning fix must preserve the absolute bowl index/parity and must not change the validated COMMON / RETURN / FLIP pose data just to make the animation look continuous.
-
-## Regression / sanity checks
-
-After cloning:
+Run:
 
 ```bash
 python scripts/validate_baseline.py
+```
+
+Expected current result: timing/metadata sanity PASS plus explicit message that **mechanical geometry revalidation is required**.
+
+Binary recovery can be checked with:
+
+```bash
 python scripts/verify_binary_hashes.py
 ```
 
-- `validate_baseline.py` checks timing/phase and stored V11/V10 invariants.
-- `verify_binary_hashes.py` checks any recovered CAD/archive binaries against the exact archived size/SHA-256. Use `--strict` after all binary artifacts have been copied into the repository.
+## Critical rules
 
-See [`scripts/README.md`](scripts/README.md).
-
-## Historical development data
-
-Preserved so future work does not lose the reasoning path:
-
-- [`data/history/timing_screw_v1_sections.json`](data/history/timing_screw_v1_sections.json)
-- [`data/history/timing_screw_v2_1_transfer.json`](data/history/timing_screw_v2_1_transfer.json)
-- [`data/history/timing_screw_v3_return_branch.json`](data/history/timing_screw_v3_return_branch.json)
-- [`data/archive/historical_small_artifacts.json`](data/archive/historical_small_artifacts.json) – station/contact tables from multiple intermediate versions.
-
-## CAD / binary artifact traceability
-
-Large CAD/mesh/archive files generated during the session are tracked by exact filename, byte count and SHA-256 in:
-
-- [`docs/BINARY_ARTIFACT_CHECKSUMS.json`](docs/BINARY_ARTIFACT_CHECKSUMS.json)
-- [`docs/ARTIFACT_MANIFEST.md`](docs/ARTIFACT_MANIFEST.md)
-- [`docs/UPLOAD_STATUS.md`](docs/UPLOAD_STATUS.md)
-- [`cad/README.md`](cad/README.md)
-
-This prevents later files from being mistaken for the approved checkpoint even when binary transfer/storage is handled separately.
-
-## Critical rules that must not be broken silently
-
+- Correct product geometry is Ø138 bottom / Ø120 top.
 - Do not rely on conveyor traction after the bowl is lifted off the belt.
 - Do not release the timing screw too early.
 - Do not open full transfer relief before positive takeover.
@@ -147,21 +112,14 @@ This prevents later files from being mistaken for the approved checkpoint even w
 - Do not create fake bowl rotation in the viewer; motion must be trajectory driven.
 - Do not treat AI concept renders as engineering geometry.
 
-## Current engineering maturity
+## Next engineering work
 
-This is a **kinematic/CAD development checkpoint**, not a released manufacturing drawing set.
+1. regenerate corrected bowl envelope and pose trajectories;
+2. regenerate lift/return and receiving guides;
+3. regenerate timing screw with positive-drive validation;
+4. recompute shaft/transfer clearances;
+5. refit the selected roller contact path;
+6. rerun multi-bowl collision/phase sweep;
+7. create a new corrected-geometry PASS checkpoint.
 
-Still required before fabrication freeze:
-
-- real packed-product CG/variation
-- friction data
-- bowl stiffness/deformation
-- transfer contact force/torque
-- shaft/bearing/arm structural checks
-- tolerance stack and adjustability
-- sanitation/material detailing
-- physical prototype validation up to 160 bowls/min
-
-## Repository note
-
-The repository is intended to be the persistent engineering source of truth. Any new design version should update the baseline, preserve the previous failure reason, and add validation data rather than overwriting the reasoning history.
+This repository is an engineering-development checkpoint, not a released manufacturing drawing set.

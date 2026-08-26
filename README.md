@@ -18,6 +18,9 @@ at **160 bowls/min**.
 4. [`docs/NEXT_WORK_PLAN.md`](docs/NEXT_WORK_PLAN.md) – next engineering tasks and acceptance criteria.
 5. [`data/current_baseline.json`](data/current_baseline.json) – machine-readable baseline for agents/scripts.
 6. [`simulation/V12_BUG_ANALYSIS.md`](simulation/V12_BUG_ANALYSIS.md) – exact root cause of the disappearing-bowl viewer bug and V12.1 acceptance criteria.
+7. [`docs/CODEX_HANDOFF.md`](docs/CODEX_HANDOFF.md) – mandatory handoff/read order for Codex or another engineering agent.
+8. [`docs/UPLOAD_STATUS.md`](docs/UPLOAD_STATUS.md) – what is actually stored in GitHub versus binary artifacts tracked only by checksum.
+9. [`cad/README.md`](cad/README.md) – CAD lineage, current preferred checkpoint and binary verification workflow.
 
 ## Product
 
@@ -98,15 +101,19 @@ The fix is recorded separately so it cannot be confused with a mechanical redesi
 
 The spawning fix must preserve the absolute bowl index/parity and must not change the validated COMMON / RETURN / FLIP pose data just to make the animation look continuous.
 
-## Regression / sanity check
+## Regression / sanity checks
 
-Run after cloning:
+After cloning:
 
 ```bash
 python scripts/validate_baseline.py
+python scripts/verify_binary_hashes.py
 ```
 
-The script checks the line timing/phase relationship and the currently stored V11 validation invariants. See [`scripts/README.md`](scripts/README.md).
+- `validate_baseline.py` checks timing/phase and stored V11/V10 invariants.
+- `verify_binary_hashes.py` checks any recovered CAD/archive binaries against the exact archived size/SHA-256. Use `--strict` after all binary artifacts have been copied into the repository.
+
+See [`scripts/README.md`](scripts/README.md).
 
 ## Historical development data
 
@@ -123,6 +130,8 @@ Large CAD/mesh/archive files generated during the session are tracked by exact f
 
 - [`docs/BINARY_ARTIFACT_CHECKSUMS.json`](docs/BINARY_ARTIFACT_CHECKSUMS.json)
 - [`docs/ARTIFACT_MANIFEST.md`](docs/ARTIFACT_MANIFEST.md)
+- [`docs/UPLOAD_STATUS.md`](docs/UPLOAD_STATUS.md)
+- [`cad/README.md`](cad/README.md)
 
 This prevents later files from being mistaken for the approved checkpoint even when binary transfer/storage is handled separately.
 

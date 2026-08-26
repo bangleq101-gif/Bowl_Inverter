@@ -1,0 +1,5 @@
+{
+  "740": {"slab_total_volume_mm3":5137.69,"negative_y_return_side_volume_mm3":1417.44,"positive_y_transfer_side_volume_mm3":3720.25,"return_side_fraction":0.2759,"transfer_side_fraction":0.7241,"return_side_material_present":true},
+  "780": {"slab_total_volume_mm3":5413.5,"negative_y_return_side_volume_mm3":1253.31,"positive_y_transfer_side_volume_mm3":4160.19,"return_side_fraction":0.2315,"transfer_side_fraction":0.7685,"return_side_material_present":true},
+  "840": {"slab_total_volume_mm3":8772.95,"negative_y_return_side_volume_mm3":4636.81,"positive_y_transfer_side_volume_mm3":4136.14,"return_side_fraction":0.5285,"transfer_side_fraction":0.4715,"return_side_material_present":true}
+}

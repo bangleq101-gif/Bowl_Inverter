@@ -1,0 +1,23 @@
+{
+  "generated": "2026-08-26",
+  "artifacts": [
+    {"filename":"timing_screw_v11_regenerated.step","bytes":3687787,"sha256":"0ed12e14a1e54c7cf15868919a454daf3d081795a8bb9171da3c4751606db17b"},
+    {"filename":"timing_screw_v11_regenerated.stl","bytes":549184,"sha256":"680e37c13942d8746d136cec68483d7bd2aa4d6d34f424899a6bb85b764632d6"},
+    {"filename":"bowl_inverter_v11_final_assembly.step","bytes":4453895,"sha256":"986f095e01b778d3881b9bdc7107e9fe7c3f8c11028476095453a75c7f558879"},
+    {"filename":"bowl_inverter_v10_10_high_retract_rotor.step","bytes":44175,"sha256":"4d1aacfc0659fbd01435db7cc18710afea48f0a5cee6ae99b7ba36ff4f99f15b"},
+    {"filename":"bowl_inverter_v10_10_assembly.step","bytes":6070020,"sha256":"926e12b097e450082e04203cb4ead85c31965d97bf7116cdb53e35df0d91f9b5"},
+    {"filename":"bowl_inverter_v6_lift_return_guide.step","bytes":684524,"sha256":"c6642d6913e2a3e3270364c525f78c23e788972cc710dc1994a83f0ecb8cebac"},
+    {"filename":"bowl_inverter_v6_receiving_guide.step","bytes":211938,"sha256":"5916ba61a5c34bf8fc9e86f183759428cc821a292d917f48a4096e31738b3b39"},
+    {"filename":"bowl_inverter_v6_paddle_contact_path.step","bytes":96474,"sha256":"e9d88e758894f803c52966c76df5bd647c8114dceed8f3f6410b97be2f787594"},
+    {"filename":"bowl_inverter_v6_guides_assembly.step","bytes":6162504,"sha256":"69383a322e048b9d3149fec5ef9535f197eab10ffac80cf94b16d163b3d5af49"},
+    {"filename":"timing_screw_v5_1_positive_drive.step","bytes":5316467,"sha256":"25598bc412dca45ae208935a6312837fbaa3f77a71693ecfe7ee51c3e52ff0d5"},
+    {"filename":"timing_screw_v5_1_positive_drive.stl","bytes":638984,"sha256":"adafc68614c54d32afccfe217dacaed79d62a7e80fc7dd36e97c4c65aae92b5a"},
+    {"filename":"timing_screw_v4_dual_path.step","bytes":5658475,"sha256":"8e783b511dbe2ebede0c4e2d5aba8412f28ea589308e68a8099facb51a9b01f2"},
+    {"filename":"timing_screw_v4_dual_path.stl","bytes":741684,"sha256":"0e990bd3b94b6d703c6c2b784303f386b658e7a53ef69b96d7852cd3b67cbc24"},
+    {"filename":"bowl_inverter_v12_playback.html","bytes":68991,"sha256":"5d8e22f7c7cf11261ea992f4b730fea009abceeaa79a7f24d61750ff4b1d5e0a"},
+    {"filename":"bowl_inverter_v10_10_cam_cycle.csv","bytes":25160,"sha256":"a7bb5a9b15c8e2aed7a547c3e01784603a872ee7c297e3ad247556d423dc90a4"},
+    {"filename":"bowl_inverter_v10_10_dynamic_clearance.csv","bytes":260626,"sha256":"3a048d4af624ec053e66dfce0d2348a7c648fa0d422d04dc902169ae7999b5de"},
+    {"filename":"bowl_inverter_all_artifacts_2026-08-26.tar.gz","bytes":21698043,"sha256":"98f2822d410fd05297f133c268f3337406b5e81cecae77cc648539ae5d7ad953"},
+    {"filename":"bowl_inverter_v11_v12_artifacts.tar.gz","bytes":2426871,"sha256":"bac7cee5973c79d3a1ac2d053a1dee0a1a0f9d24c4e6ff49f6a391bf1149e270"}
+  ]
+}

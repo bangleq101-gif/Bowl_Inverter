@@ -1,0 +1,57 @@
+{
+  "version": "V13_trajectory_candidate_2026-08-26",
+  "status": "KINEMATIC_TRAJECTORY_SCREEN_PASS__CAD_SCREW_ROTOR_FORCE_VALIDATION_PENDING",
+  "product": {
+    "bottom_diameter_mm": 138,
+    "top_diameter_mm": 120,
+    "height_mm": 62,
+    "mass_g": 87,
+    "rotation_sign": "negative theta = CCW in current convention"
+  },
+  "line": {
+    "rate_bowls_min": 160.0,
+    "pitch_mm": 160.0,
+    "speed_mm_s": 426.6666666666667,
+    "bowl_interval_s": 0.375,
+    "flip_event_interval_s": 0.75
+  },
+  "pose_laws": {
+    "common": "s=x/640; q=S5(s); theta=-52q; cy=-115+39q-7sin²(pi s); cz=31+65q",
+    "return": "s=(x-640)/320; q=S5(s); theta=-52(1-q); cy=-76-39q-7sin²(pi s); cz=96-65q",
+    "flip": "s=(x-640)/300; q=S5(s); theta=-52-128q; cy=-76+201q; cz=96-65q+45sin²(pi s); settled at x>=940",
+    "S5": "10s^3-15s^4+6s^5"
+  },
+  "validation": {
+    "COMMON": {"min_shaft_clearance_mm": 11.025042049789935,"at_x_mm": 415,"min_bowl_z_mm": 0.0,"max_bowl_z_mm": 162.36615095149872},
+    "RETURN": {"min_shaft_clearance_mm": 11.025105324550577,"at_x_mm": 752,"min_bowl_z_mm": 0.0,"max_bowl_z_mm": 162.36615095149872},
+    "FLIP": {"min_shaft_clearance_mm": 11.095941282539886,"at_x_mm": 640,"min_bowl_z_mm": 0.0,"max_bowl_z_mm": 188.02608907075796}
+  },
+  "shaft_clearance_target_mm": 10.0,
+  "neighbor_longitudinal_clearance_mm": 22.0,
+  "trigger": {
+    "x_start_mm": 660,"receiving_start_mm": 675,"x_release_mm": 690,"duration_s": 0.0703125,
+    "contact": "upper outer rim C=(-60,+31) local; horizontal +Y push","roller_radius_mm": 8,
+    "moment_sign": "Mx/Fy=-r_z < 0 => CCW","uniform_frustum_Ix_kg_m2": 0.00011894357008554258,
+    "uniform_frustum_cg_height_mm": 29.560475165580225,"ideal_inertial_force_component_N": 0.044942639443217726,
+    "ideal_gravity_resistance_equivalent_force_at_x660_N": 0.22625364402997414,
+    "note": "force values exclude friction/deformation/guide losses; physical test required"
+  },
+  "receiving_guide": {
+    "start_x_mm": 675,"trigger_overlap_mm": 15,"trigger_overlap_s": 0.03515625,
+    "post_trigger_full_screw_overlap_mm": 20,"post_trigger_full_screw_overlap_s": 0.046875,
+    "contact_rule": "contact walks on screw-side wall B->D; lambda=S5(clamp((|theta|-70)/80))"
+  },
+  "neutral_tipping_by_cg": {
+    "26": {"neutral_angle_deg": 69.35300917502964,"flip_x_mm_approx": 723},
+    "31": {"neutral_angle_deg": 65.80679101271123,"flip_x_mm_approx": 716},
+    "36": {"neutral_angle_deg": 62.447188423282206,"flip_x_mm_approx": 708}
+  },
+  "dynamics_at_160_bowls_min": {
+    "COMMON": {"duration_s": 1.5,"max_abs_angular_velocity_deg_s": 64.99957682416002,"max_abs_angular_accel_deg_s2": 133.43072306306567,"max_abs_lateral_velocity_mm_s": 53.544964152364024,"max_abs_lateral_accel_mm_s2": 129.30445840271813,"max_abs_vertical_velocity_mm_s": 81.24947103019926,"max_abs_vertical_accel_mm_s2": 166.78840382826618},
+    "RETURN": {"duration_s": 0.75,"max_abs_angular_velocity_deg_s": 129.9966146230084,"max_abs_angular_accel_deg_s2": 533.6994270845834,"max_abs_lateral_velocity_mm_s": 107.08742200351784,"max_abs_lateral_accel_mm_s2": 517.1915815185963,"max_abs_vertical_velocity_mm_s": 162.495768278759,"max_abs_vertical_accel_mm_s2": 667.1242838518488},
+    "FLIP": {"duration_s": 0.703125,"max_abs_angular_velocity_deg_s": 341.323219887939,"max_abs_angular_accel_deg_s2": 1494.7066833834267,"max_abs_lateral_velocity_mm_s": 535.9841187302785,"max_abs_lateral_accel_mm_s2": 2347.1565887538923,"max_abs_vertical_velocity_mm_s": 313.8149793210172,"max_abs_vertical_accel_mm_s2": 2067.262411828981}
+  },
+  "speed_scaling": "For fixed X-geometry: velocities scale proportional to bowls/min; accelerations scale with (bowls/min)^2.",
+  "screw": {"shaft_axis_y_mm": -21.5,"shaft_axis_z_mm": 26.5,"shaft_od_mm": 25,"historical_blank_od_mm": 135,"selected_center_crosses_screw_axis_x_mm_approx": 752,"cad_status": "must regenerate swept-envelope/groove; trajectory screen does not validate V11 solid"},
+  "manufacturing_status": "NOT RELEASED FOR FABRICATION"
+}

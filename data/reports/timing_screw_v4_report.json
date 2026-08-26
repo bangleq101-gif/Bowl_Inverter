@@ -1,0 +1,20 @@
+{
+  "version": "V4_dual_path_swept_envelope",
+  "warning": "Prototype geometry for kinematic verification only; not final CNC geometry.",
+  "screw": {"blank_od_mm":120.0,"shaft_od_mm":25.0,"pitch_mm":160.0,"axis_height_mm":25.0,"length_mm":1200.0},
+  "sampling": {"dx_mm":12.0,"cutters":127,"common_clearance_mm":3.0,"transfer_clearance_mm":6.0},
+  "trajectory_model": {
+    "common": "upright -> 52deg by x=640; screw remains longitudinal master",
+    "return": "52deg -> 0deg from x=640..960, no lateral cross-over",
+    "flip": "52deg -> 180deg from x=640..920, lateral cross-over to opposite side",
+    "rotating_frame": "all bowl envelopes transformed by inverse screw phase phi=360*x/pitch before boolean cut"
+  },
+  "files": {"step":"timing_screw_v4_dual_path.step","stl":"timing_screw_v4_dual_path.stl"},
+  "volume_mm3":9875469.883439103,
+  "valid":true,
+  "notes":[
+    "The same screw surface contains the union clearance envelope of RETURN and FLIP trajectories.",
+    "If the return-side drive lug disappears in inspection, the transfer trajectory/relief must be revised before machining.",
+    "Flip center-height path after 52deg is still provisional and must be optimized with paddle/guide collision analysis."
+  ]
+}

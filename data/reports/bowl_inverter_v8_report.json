@@ -1,0 +1,8 @@
+{
+  "version": "V8_curved_3D_paddle",
+  "decision": "Reject V7 wide rectangular shoe for product-level geometry; use a narrow cam-shaped 3D shoe whose contact point migrates along the rigid shoe as the rotor turns.",
+  "rotor": {"center_world_mm":[623.0,56.0],"axis":"vertical","arms":3,"rpm":26.666666666666668,"arm_spacing_deg":120,"contact_rotation_deg":36.0},
+  "shoe": {"cross_section":"round prototype","radius_mm":4.0,"centerline_outward_offset_from_nominal_bowl_surface_mm":8.5,"spline_smoothing":1.0,"recommended_mount_compliance_mm":5},
+  "validation": {"selected_bowl_min_geometric_clearance_mm":0.16566931002054108,"selected_bowl_max_geometric_clearance_mm":4.655882310737621,"selected_bowl_mean_geometric_clearance_mm":2.4273948757128307,"minimum_clearance_to_any_adjacent_unflipped_bowl_mm":61.607384817253816,"unflipped_required_min_mm":10,"unflipped_pass":true},
+  "mechanical_note": "Upper hub/arms in the reference STEP are kinematic placeholders. The lower attachment from arm to curved shoe must be routed outside the bowl swept envelope in V9."
+}

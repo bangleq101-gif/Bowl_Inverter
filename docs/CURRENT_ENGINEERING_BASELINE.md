@@ -2,28 +2,36 @@
 
 Tài liệu này là baseline hiện tại của dự án. Nếu có mâu thuẫn giữa các file cũ và tài liệu này, ưu tiên tài liệu này cho tới khi có checkpoint mới hơn.
 
-## Product
+## Product – corrected 2026-08-26
 
-- Top diameter: **138 mm**
-- Bottom diameter: **120 mm**
+- **Bottom / conveyor-contact diameter: 138 mm**
+- **Top diameter: 120 mm**
 - Height: **62 mm**
 - Mass: **87 g**
-- Incoming orientation: upright
+- Incoming orientation: upright, Ø138 base on conveyor
 - Approximation: truncated cone
+- Corrected radius profile, with `z` measured upward from the bottom plane:
 
-## Throughput and timing
+`r(z) = 69 - 9*z/62` mm, `0 <= z <= 62`
+
+Taper half-angle magnitude remains **8.259°**, but the taper direction is reversed relative to the older model.
+
+See `docs/GEOMETRY_CORRECTION_2026-08-26.md`.
+
+## Throughput and timing – still valid
 
 - Throughput: **160 bowls/min**
 - Bowl interval: **0.375 s**
 - Flip event interval: **0.75 s**
 - Product pitch: **160 mm**
 - Axial line speed: **426.667 mm/s**
-- Timing screw speed: **160 rpm**
-- Timing screw: single-start baseline
-- Rotor speed: **26.667 rpm**
+- Timing screw speed relation at baseline: **160 rpm**, single-start
+- Rotor speed relation at baseline: **26.667 rpm**
 - Rotor arms: **3**
 - Rotor rotation per bowl: **60°**
 - Rotor rotation per flip event: **120°**
+
+These are timing/phase relationships only. They do not preserve the previous CAD/contact validation after the bowl geometry correction.
 
 ## Coordinate convention
 
@@ -31,139 +39,132 @@ Tài liệu này là baseline hiện tại của dự án. Nếu có mâu thuẫ
 - Y: lateral across timing screw/conveyor
 - Z: vertical
 
-Current corrected timing-screw axis:
+Previously used timing-screw axis:
 
 - Y = **-21.5 mm**
 - Z = **26.5 mm**
 
-## Timing screw baseline – V11
+This axis remains a design starting point, not a newly validated final axis for the corrected bowl.
+
+## Geometry-validation status
+
+**CURRENT STATUS: REVALIDATION REQUIRED.**
+
+The old V6/V10.10/V11 geometry was generated using the reversed product taper (Ø120 bottom / Ø138 top). After correcting the product to Ø138 bottom / Ø120 top, those geometry PASS claims are stale.
+
+A diagnostic placement of the corrected bowl on the old trajectories produced approximately:
+
+- RETURN minimum bowl-to-shaft clearance: **2.58 mm**
+- FLIP minimum bowl-to-shaft clearance: **4.11 mm**
+
+Both are below the previous >=5 mm target at some sampled positions, therefore the old screw/trajectory set cannot remain the current geometry baseline.
+
+## Timing screw – historical V11, now stale for corrected product geometry
+
+Historical V11 values:
 
 - Blank OD: **135 mm**
 - Shaft OD: **25 mm**
 - Pitch: **160 mm**
-- Screw surface generated from bowl swept-envelope around the corrected axis
-- Transfer region is circumferentially asymmetric
-- Return-side drive material must remain while selected-bowl crossover relief opens
+- Corrected-axis checkpoint used Y=-21.5 mm, Z=26.5 mm
+- Asymmetric transfer concept retained return-side drive material while selected-bowl relief opened
 
-### Mandatory screw behavior
+The **principle remains mandatory**, but the V11 solid must be regenerated from the corrected bowl envelope before a new geometry PASS can be claimed.
+
+### Mandatory screw behavior retained
 
 The screw remains the longitudinal phase master after the bowl leaves the conveyor.
 
-It must retain a drive flank/lug until paddle/roller and receiving guide have established positive control.
+It must retain a drive flank/lug until roller/paddle and receiving guide have established positive control.
 
 Do not open full relief early.
 
 ## Pre-flip branch
 
-Current pre-flip angle baseline: **~52°**.
+Current provisional pre-flip angle remains **~52°** as a starting point, not a frozen value.
 
-This is still provisional because the true packed-product CG has not been measured.
+With corrected base radius 69 mm, a simple static edge-pivot estimate gives approximate tipping angles:
 
-## Selected bowl branch – conceptual station sequence
+- CG 26 mm -> **69.35°**
+- CG 31 mm -> **65.81°**
+- CG 36 mm -> **62.45°**
 
-Approximate station logic used during development:
+Thus 52° remains below this simple estimate for the previously assumed CG range. Real packed-product CG must still be measured.
 
-| X (mm) | Bowl state | Control state |
-|---:|---|---|
-| ~640 | ~52° | screw full drive + lift guide |
-| ~670 | first transfer contact | screw still full drive |
-| ~705 | ~58° | receiving guide begins takeover |
-| ~740 | ~65° | last full-drive region |
-| ~780 | ~78° | trailing drive lug + transfer relief |
-| ~840 | ~110° | bowl crosses screw-axis region |
-| ~875 | ~145° | transfer actuator releases |
-| ~920 | ~180° | inverted/output branch |
+## Selected and return branches
 
-These X values are development stations, not frozen manufacturing dimensions.
+The previously stored X stations and pose trajectories are now **historical references only** until regenerated with the corrected product taper.
 
-## Non-selected return branch
+The logical control sequence is retained:
 
-The non-selected bowl remains on the original side of the screw and returns from pre-flip toward upright.
+1. capture/metering;
+2. lift + positive screw drive;
+3. pre-flip;
+4. selected-bowl transfer contact;
+5. positive-control overlap;
+6. asymmetric transfer relief;
+7. receiving-guide takeover;
+8. selected bowl -> inverted output, non-selected bowl -> upright return.
 
-The timing screw continues positive longitudinal drive while the return guide controls angle/height.
+## Rotor/roller – historical V10.10, now stale for corrected product geometry
 
-The transfer relief must not remove this return-side drive path.
-
-## Rotor/roller baseline – V10.10
-
-Current actuation concept:
+The concept is retained:
 
 - 3-arm rotor
-- Average speed: **26.667 rpm**
-- Arm event interval: **0.75 s**
-- Active transfer-contact interval: about **0.225 s**
-- Modeled arm arrival order for the chosen rotation: **0 -> 2 -> 1**
-- Only the correctly phased roller enters the product zone
-- Inactive rollers retract upward to approximately **Z=170 mm**
-- Intended contact is tangent/controlled contact
-- Geometric penetration is not accepted
+- baseline timing relation **26.667 rpm at 160 bowls/min**
+- only correctly phased roller enters product zone
+- inactive rollers retract upward
+- intended selected-bowl contact is tangent/controlled contact
+- wrong/non-active rollers must not touch any bowl
+- rigid geometric penetration is not accepted
 
-### V10.10 screening values
+However the V10.10 clearance numbers were calculated with the old product surface and must be recomputed after the new bowl trajectory is solved.
 
-- Unflipped bowl to any roller minimum clearance: ~**79.36 mm**
-- Flip bowl to wrong roller minimum clearance: ~**95.05 mm**
-- Neighbor bowl minimum clearance: ~**22 mm**
-- Bowl to screw shaft clearance carried forward: ~**5.09 mm**
-- Assigned roller active contact: near zero gap within point-cloud tolerance
+## Guide principle retained
 
-## Contact definitions
+1. **Lift/return guide** supports weight and controls pose.
+2. **Receiving guide** controls the selected bowl after transfer starts.
+3. Guides must not become the primary axial-drive source while the bowl is off the belt.
+4. No uncontrolled free flight.
 
-### Unselected bowl / wrong roller
-
-Must remain separated. No touch allowed.
-
-### Selected bowl / assigned roller
-
-Contact is intentional because force is required to transfer/flip the bowl. The requirement is **tangent controlled contact without solid penetration**.
-
-## Guide baseline
-
-Two logical guide functions are retained:
-
-1. **Lift/return guide** – raises/tilts all bowls toward pre-flip; non-selected bowls then return to upright.
-2. **Receiving guide** – receives the selected bowl after transfer begins and prevents uncontrolled free flight.
-
-Guides control support/pose. They must not become the primary axial-drive mechanism while the bowl is off the belt.
+The V6 guide curves themselves are stale and must be regenerated.
 
 ## Simulation status
 
-### Engineering CAD/trajectory
+### V12.1
 
-- V10.10: preliminary kinematic/contact-envelope PASS
-- V11 screw: regenerated final-axis baseline
+Continuous spawning bug was corrected conceptually by using absolute bowl indexes derived from the visible X window rather than a fixed local index range.
 
-### V12 web playback
+### V12.3
 
-**Known FAIL / incomplete**:
+Viewer geometry is corrected to **Ø138 bottom / Ø120 top**, with a clearer conveyor surface and adjustable bowls/min playback timing.
 
-- bowl spawning/window loop is incomplete;
-- bowls can disappear after the playback runs for a short time;
-- viewer is not approved as design evidence yet.
+Important: V12.3 is a **geometry-orientation / continuity preview**, not design evidence for guide/screw/roller clearance because the engineering trajectories are still awaiting regeneration.
 
 ## Not frozen yet
 
-The following are NOT manufacturing-frozen:
-
-- true CG and product variation
-- final pre-flip angle
+- real CG and product variation
+- regenerated pre-flip/return/flip trajectories
+- timing-screw final OD/axis/groove for corrected taper
 - exact guide cross-sections
 - contact force profile
-- roller material and diameter
+- roller geometry/material
 - rotor bearing arrangement
-- shaft sizing for final torque/deflection
+- shaft sizing
 - stiffness/fatigue
 - sanitation design
 - tolerance stack
 - adjustment mechanisms
-- final CNC-ready screw surface after physical prototype validation
+- final CNC-ready screw surface
 
 ## Manufacturing gate
 
 Do not release for fabrication until at least:
 
-1. real-product CG and variation are measured;
-2. force/contact model is validated;
-3. screw/guide/paddle collision sweep passes with tolerances;
-4. structural loads and deflection pass;
-5. physical prototype confirms transfer at target speed;
-6. sanitation/material requirements are incorporated.
+1. corrected product geometry is propagated through all trajectories/CAD;
+2. real-product CG and variation are measured;
+3. force/contact model is validated;
+4. screw/guide/roller collision sweep passes with tolerances;
+5. structural loads and deflection pass;
+6. physical prototype confirms transfer at target speed;
+7. sanitation/material requirements are incorporated.

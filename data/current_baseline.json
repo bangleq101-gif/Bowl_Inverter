@@ -1,0 +1,87 @@
+{
+  "project": "Bowl_Inverter",
+  "checkpoint_date": "2026-08-26",
+  "goal": "alternate upright/inverted output at 160 bowls/min",
+  "product": {
+    "top_diameter_mm": 138.0,
+    "bottom_diameter_mm": 120.0,
+    "height_mm": 62.0,
+    "mass_g": 87.0,
+    "incoming_orientation": "upright",
+    "approximation": "truncated_cone"
+  },
+  "line": {
+    "rate_bowls_per_min": 160.0,
+    "bowl_interval_s": 0.375,
+    "flip_event_interval_s": 0.75,
+    "pitch_mm": 160.0,
+    "axial_speed_mm_s": 426.6666667
+  },
+  "timing_screw": {
+    "baseline_version": "V11",
+    "rpm": 160.0,
+    "starts": 1,
+    "blank_od_mm": 135.0,
+    "shaft_od_mm": 25.0,
+    "axis_y_mm": -21.5,
+    "axis_z_mm": 26.5,
+    "pitch_mm": 160.0,
+    "principle": "positive longitudinal drive remains after bowl leaves conveyor",
+    "transfer_section": "asymmetric; preserve return-side drive material while opening selected-bowl crossover sector"
+  },
+  "preflip": {
+    "baseline_angle_deg": 52.0,
+    "status": "provisional pending real CG measurement"
+  },
+  "rotor": {
+    "baseline_version": "V10.10",
+    "arms": 3,
+    "rpm": 26.6666667,
+    "rotation_per_bowl_deg": 60.0,
+    "rotation_per_flip_event_deg": 120.0,
+    "arm_order": [0, 2, 1],
+    "active_contact_window_s": 0.225,
+    "inactive_roller_park_z_mm": 170.0,
+    "contact_rule": "assigned roller tangent contact; no geometric penetration; wrong rollers must not touch"
+  },
+  "guides": {
+    "lift_return_guide": "supports weight and controls pose; not primary axial-drive source",
+    "receiving_guide": "controls selected bowl after transfer starts; no uncontrolled free flight"
+  },
+  "screening": {
+    "v10_10_status": "preliminary_pass",
+    "unflipped_to_any_roller_min_clearance_mm": 79.36,
+    "flip_to_wrong_roller_min_clearance_mm": 95.05,
+    "neighbor_bowl_min_clearance_mm": 22.0,
+    "bowl_to_shaft_min_clearance_mm_carried_forward": 5.09,
+    "intended_contact": "approximately zero gap within numerical point-cloud tolerance"
+  },
+  "simulation": {
+    "current_version": "V12",
+    "status": "known_bug",
+    "bug": "bowls can disappear after running briefly due to incomplete spawn/window/loop logic",
+    "approved_as_design_evidence": false
+  },
+  "locked_rules": [
+    "timing screw remains positive-drive master after bowl leaves belt",
+    "do not open transfer relief before control takeover",
+    "do not neck down full screw circumference in transfer zone",
+    "no uncontrolled free flight",
+    "wrong/non-active rollers must not touch bowls",
+    "no rigid geometric penetration",
+    "animation must be trajectory-driven, not manually rotated for appearance",
+    "AI concept renders are not engineering geometry"
+  ],
+  "not_yet_validated": [
+    "real packed-product center of gravity and variation",
+    "friction coefficients",
+    "bowl stiffness/deformation",
+    "required contact force",
+    "shaft torque/deflection",
+    "bearing loads",
+    "fatigue",
+    "tolerance stack",
+    "sanitation/material details",
+    "physical prototype at 160 bowls/min"
+  ]
+}

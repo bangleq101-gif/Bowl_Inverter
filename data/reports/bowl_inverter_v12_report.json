@@ -1,0 +1,8 @@
+{
+  "version": "V12_self_running_kinematic_playback",
+  "sources": {"screw":"V11 regenerated STEP","bowl_paths":"V4 pose samples","guides":"V6 guide paths","rotor_cam":"V10.10 cam cycle"},
+  "playback": {"offline_single_html":true,"auto_run":true,"multi_bowl":true,"rate_bowls_min":160,"screw_rpm":160,"rotor_rpm":26.6666667},
+  "viewer_note": "Bowl motion and rotor cam positions are data-driven. Screw surface is rendered schematically as a rotating OD/helix for browser speed; use V11 STEP for exact screw geometry.",
+  "known_bug": "Bowls run briefly then disappear; continuous spawn/recycle/window logic is incomplete.",
+  "files": {"web":"bowl_inverter_v12_playback.html","final_assembly":"bowl_inverter_v11_final_assembly.step"}
+}

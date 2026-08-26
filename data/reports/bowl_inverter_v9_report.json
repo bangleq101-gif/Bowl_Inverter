@@ -1,0 +1,7 @@
+{
+  "version": "V9_connected_paddle_hanger",
+  "geometry": {"shoe":"V8 curved 3D shoe","lower_link_radius_mm":3,"vertical_post_radius_mm":4,"anchor_radius_mm":215.0,"anchor_local_angle_deg":-6.09120173876222,"upper_arm_radius_mm":7,"upper_arm_z_mm":220.0,"compliance":"5 mm nominal telescopic/spring compliance at the outboard lower-link mount"},
+  "clearance": {"selected_bowl_min_lower_link_mm":5.549359010524288,"selected_bowl_min_vertical_post_mm":25.584500768465706,"adjacent_unflipped_min_lower_link_mm":70.81540581349364,"adjacent_unflipped_min_vertical_post_mm":69.81540581349364,"target_structural_clearance_mm":5,"preliminary_pass":true},
+  "note": "This is a connected kinematic rotor suitable for dynamic CAD checking. Bearing selection, stiffness/FEA, sanitation details and cam/compliance hardware are not yet final fabrication design.",
+  "next": "V10: animate screw + guides + connected 3-arm rotor at 160 CPM and check phase/collision across multiple simultaneous bowls."
+}

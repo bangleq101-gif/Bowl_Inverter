@@ -1,0 +1,16 @@
+{
+  "version": "V1_sections_0_52deg",
+  "units": "mm_deg_rpm",
+  "product": {"top_diameter": 138.0, "bottom_diameter": 120.0, "height": 62.0, "mass_g": 87.0, "infeed_orientation": "upright_bottom_down"},
+  "line": {"rate_bowls_per_min": 160.0, "pitch": 160.0, "line_speed_mm_s": 426.667},
+  "screw_baseline": {"starts": 1, "speed_rpm": 160.0, "blank_od": 120.0, "steel_shaft_od": 25.0, "target_min_uhmw_hub_od": 35.0, "axis_from_virtual_pivot_y": 55.0, "axis_height_from_belt_z": 25.0, "radial_pocket_clearance": 3.0, "drive_flank_axial_clearance_target": 1.5, "leading_flank_axial_clearance_target": 4.0},
+  "kinematics": {"tilt_zone_length": 640.0, "tilt_profile": "theta = 52deg * (10u^3 - 15u^4 + 6u^5)", "pivot_lift_rule": "0 mm through 20deg, then quintic rise to 47 mm at 52deg", "virtual_pivot": "bottom rim point on screw side", "positive_drive_requirement": "timing screw drive flank remains engaged after bowl leaves conveyor"},
+  "stations": [
+    {"tilt_deg": 0.0, "x_mm": 0.0, "pivot_lift_mm": 0.0, "screw_phase_deg": 0.0, "min_bowl_radius_from_screw_axis_mm": 50.838, "pocket_cut_radius_mm": 47.838, "pocket_depth_from_blank_od_mm": 12.162, "deepest_cut_angle_world_deg": 171.741, "deepest_cut_angle_screw_frame_deg": 171.741, "drive_band_radius_from_axis_mm": 52.853, "drive_band_angle_screw_frame_deg": 187.611},
+    {"tilt_deg": 15.0, "x_mm": 245.105, "pivot_lift_mm": 0.0, "screw_phase_deg": 191.486, "min_bowl_radius_from_screw_axis_mm": 40.658, "pocket_cut_radius_mm": 37.658, "pocket_depth_from_blank_od_mm": 22.342, "deepest_cut_angle_world_deg": 156.741, "deepest_cut_angle_screw_frame_deg": 325.255, "drive_band_radius_from_axis_mm": 48.531, "drive_band_angle_screw_frame_deg": 358.349},
+    {"tilt_deg": 30.0, "x_mm": 346.376, "pivot_lift_mm": 8.46, "screw_phase_deg": 59.345, "min_bowl_radius_from_screw_axis_mm": 32.945, "pocket_cut_radius_mm": 29.945, "pocket_depth_from_blank_od_mm": 30.055, "deepest_cut_angle_world_deg": 141.741, "deepest_cut_angle_screw_frame_deg": 82.395, "drive_band_radius_from_axis_mm": 43.795, "drive_band_angle_screw_frame_deg": 123.61},
+    {"tilt_deg": 45.0, "x_mm": 462.4, "pivot_lift_mm": 43.553, "screw_phase_deg": 320.401, "min_bowl_radius_from_screw_axis_mm": 47.768, "pocket_cut_radius_mm": 44.768, "pocket_depth_from_blank_od_mm": 15.232, "deepest_cut_angle_world_deg": 126.741, "deepest_cut_angle_screw_frame_deg": 166.339, "drive_band_radius_from_axis_mm": 50.005, "drive_band_angle_screw_frame_deg": 183.54},
+    {"tilt_deg": 52.0, "x_mm": 640.0, "pivot_lift_mm": 47.0, "screw_phase_deg": 359.994, "min_bowl_radius_from_screw_axis_mm": 46.386, "pocket_cut_radius_mm": 43.386, "pocket_depth_from_blank_od_mm": 16.614, "deepest_cut_angle_world_deg": 119.741, "deepest_cut_angle_screw_frame_deg": 119.746, "drive_band_radius_from_axis_mm": 49.996, "drive_band_angle_screw_frame_deg": 141.652}
+  ],
+  "notes": ["Kinematic V1, not a final machining drawing.", "Pocket sections belong in the rotating screw frame.", "Transfer relief must not begin until paddle and receiving guide have positive control."]
+}

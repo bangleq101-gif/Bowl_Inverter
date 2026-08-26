@@ -1,0 +1,45 @@
+{
+  "version": "V10.10_high_retract_selective_roller",
+  "principle": "Inactive rollers park above the product envelope at Z=170 mm. Only the correctly phased arm descends into the flip window.",
+  "timing": {
+    "rotor_rev_s": 2.25,
+    "flip_event_s": 0.75,
+    "active_s": 0.22499999999999998,
+    "approach_s": 0.14,
+    "retract_s": 0.14,
+    "arm_order": [0, 2, 1],
+    "rotor_rpm": 26.666666666666668,
+    "screw_rpm": 160.0
+  },
+  "geometry": {
+    "rotor_center_mm": [450.0, 120.0],
+    "roller_radius_mm": 8.0,
+    "park_z_mm": 170.0
+  },
+  "checks_mm": {
+    "unflipped": 79.35774512377587,
+    "wrong": 95.04641504853936,
+    "assigned_min": -0.09156539689011467,
+    "assigned_max": 0.06861581290142915
+  },
+  "worst_cases": {
+    "unflipped": [1.4375, -5, 1, "APPROACH_DOWN", 519.3333333333335, 79.35774512377587],
+    "wrong": [0.11875000000000001, -4, 2, 1, "PARKED_HIGH", 116.66666666666663, 95.04641504853936]
+  },
+  "acceptance": {
+    "unflipped_ge_10mm": true,
+    "wrong_roller_ge_10mm": true,
+    "assigned_tangent_no_penetration": true,
+    "assigned_tangent_near_zero_gap": true,
+    "neighbor_bowl_ge_5mm_from_prior_check": true,
+    "shaft_ge_5mm_from_prior_check": true,
+    "phase_order_0_2_1_correct": true,
+    "overall": true
+  },
+  "status": "PASS",
+  "carried_forward_checks": {
+    "neighbor_bowl_min_mm": 22.0,
+    "shaft_min_mm": 5.094690400247245
+  },
+  "engineering_note": "The selected roller intentionally makes tangent contact; non-selected rollers do not touch any bowl. No rigid geometric penetration is accepted beyond small point-cloud numerical tolerance."
+}

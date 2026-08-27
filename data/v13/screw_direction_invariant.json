@@ -1,0 +1,13 @@
+{
+  "coordinate_axis": "product transport is +X",
+  "pitch_mm": 160.0,
+  "helix_handedness_equation": "phi(x,t)=2*pi*x/P-omega*t",
+  "constant_phase_feed_direction": "+X",
+  "constant_phase_feed_speed_formula": "dx/dt=P*omega/(2*pi)=P*rpm/60",
+  "baseline_rpm": 160.0,
+  "baseline_feed_speed_mm_s": 426.6666667,
+  "matches_product_speed_at_160_bowls_min": true,
+  "old_viewer_equation": "phi=2*pi*x/P+omega*t",
+  "old_viewer_feed_direction": "-X",
+  "old_viewer_status": "wrong_sign_for_current_transport_direction"
+}

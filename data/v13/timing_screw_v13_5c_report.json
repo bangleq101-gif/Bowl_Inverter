@@ -1,0 +1,51 @@
+{
+  "version": "V13.5c_complete_validation",
+  "candidate": "timing_screw_v13_5b_true_envelope_clean.step",
+  "overall_status": "FAIL_REQUIRES_GEOMETRY_REVISION",
+  "gates": {
+    "cad_valid_single_solid": {"status": "PASS", "solid_count": 1, "volume_mm3": 6433085.273365432},
+    "timing_and_feed_direction": {"status": "PASS", "pitch_mm": 160.0, "screw_rpm_at_160_bowls_min": 160.0, "axial_feed_mm_s": 426.6666667, "feed_direction": "+X"},
+    "shaft_clearance": {
+      "status": "PASS",
+      "actual_bowl_min_mm": {"COMMON": 11.0251053246, "RETURN": 11.0251053246, "FLIP": 11.0959412825},
+      "clearance_envelope_proxy_min_mm": {"COMMON": 8.0251053246, "RETURN": 8.0251053246, "FLIP": 5.8942332387},
+      "required_envelope_min_mm": 5.0
+    },
+    "nominal_clearance_continuity": {
+      "status": "FAIL",
+      "reason": "12 mm cutter sampling creates scalloping/interpenetration between sampled poses",
+      "exact_fail_examples": [
+        {"branch": "COMMON", "x_mm": -120.0, "nominal_gap_mm": 0.0},
+        {"branch": "COMMON", "x_mm": 40.0, "nominal_gap_mm": 0.0},
+        {"branch": "RETURN", "x_mm": 800.0, "nominal_gap_mm": 0.0}
+      ]
+    },
+    "positive_drive_common_return": {"status": "MIXED_FAIL_DUE_TO_SAMPLING", "note": "At sampled cutter stations the trailing -X flank catches a lagging bowl; between cutters some nominal poses intersect the screw."},
+    "positive_drive_selected_flip": {
+      "status": "FAIL",
+      "reason": "RETURN swept cavity erases the selected-bowl trailing drive flank in the overlap zone",
+      "exact_checks": [
+        {"branch": "FLIP", "x_mm": 688.0, "lag_minus4_gap_mm": 1.793570148, "lag_minus6_gap_mm": 0.0, "lag_minus8_gap_mm": 0.0},
+        {"branch": "FLIP", "x_mm": 700.0, "lag_minus4_gap_mm": 1.9785974817, "lag_minus6_gap_mm": 0.1828526394, "lag_minus8_gap_mm": 0.0},
+        {"branch": "FLIP", "x_mm": 708.0, "lag_minus4_gap_mm": 4.4647573726, "lag_minus6_gap_mm": 3.231469661, "lag_minus8_gap_mm": 1.6220361978}
+      ],
+      "required_rule": "selected bowl must retain positive screw drive until positive-control takeover"
+    },
+    "transfer_material_reserve": {"status": "WARNING_BELOW_0.20_SCREEN", "min_material_fraction": 0.1846160520251124, "min_at_x_mm": 780.0, "screening_reference": 0.2, "note": "Material fraction is a geometry reserve indicator, not a structural stress PASS."}
+  },
+  "root_causes": [
+    "Discrete 12 mm envelope sampling is too coarse; phase step is 27 degrees at pitch 160 mm.",
+    "Full isotropic 3 mm clearance cutters are too aggressive on the drive side.",
+    "Union of RETURN and FLIP cavities removes the selected trailing drive flank around X700-X708."
+  ],
+  "next_revision": {
+    "version": "V13.6",
+    "actions": [
+      "Use dense/adaptive envelope sampling; target <=4 mm globally and <=2 mm in transfer zone, or a continuous swept construction.",
+      "Replace isotropic clearance with asymmetric drive-flank clearance: small trailing clearance and larger leading clearance.",
+      "Delay selected/return trajectory divergence while screw positive drive is required.",
+      "Preserve a selected trailing lug through the control-overlap region before opening transfer relief.",
+      "Re-run exact STEP distance checks and section-material checks before updating the viewer."
+    ]
+  }
+}
